@@ -21,23 +21,30 @@ var churchillSpeech = {
     userNamePrompt,
     favoriteSpeechPrompt;
 
+var oldestYear = speechesArray[0].year;
+var youngestYear = speechesArray[0].year;
+
+for(i=0; i<speechesArray.length; i++){
+  if(speechesArray[i].year < oldestYear){
+    oldestYear = speechesArray[i].year;
+  }
+}
+
+for(i=0; i<speechesArray.length; i++){
+  if(speechesArray[i].year > youngestYear){
+    youngestYear =  speechesArray[i].year;
+  }
+}
+
+
 document.getElementById('BtnDonate').addEventListener('click', function(){
   //Code in here executes when the user clicks the "Donate" button.
   favoriteSpeechPrompt = window.prompt('Which speech author is your favorite?');
 
-  switch(favoriteSpeechPrompt){
-    case 'Churchill':
-      console.log(speechesArray[0].author + ' was ' + speechesArray[0].authorAge + ' during this speech.');
-      break;
-    case 'Ghandi':
-      console.log(speechesArray[1].author + ' was ' + speechesArray[1].authorAge + ' during this speech.');
-      break;
-    case 'Demosthenes':
-      console.log(speechesArray[2].author + ' was ' + speechesArray[2].authorAge + ' during this speech.');
-      break;
-    default:
-      console.log('Did you spell that name correctly?');
-      break;
+  for(var i = 0; i < speechesArray.length; i++) {
+    if(favoriteSpeechPrompt === speechesArray[i].author){
+      console.log(speechesArray[i].author + " was " + speechesArray[i].authorAge + " when he wrote the speech.");
+    }
   }
 });
 
@@ -50,12 +57,14 @@ document.getElementById('BtnChurchill').addEventListener('click', function(){
   }else{
     console.log('This speech took place during the common era.');
   }
-
-  if(speechesArray[0].year < speechesArray[1].year && speechesArray[0].year < speechesArray[2].year){
-    console.log('This is the oldest speech on the page.');
-  }else if(speechesArray[0].year > speechesArray[1].year && speechesArray[0].year > speechesArray[2].year){
-    console.log('This is the most recent speech on the page.');
+  if(speechesArray[0].year >= youngestYear){
+    console.log("This is the most recent speech.");
+  }else if(speechesArray[0].year <= oldestYear){
+    console.log("This speech is ancient.");
+  }else{
+    console.log("Nothing of importance with this speech.");
   }
+
 });
 
 document.getElementById('BtnGhandi').addEventListener('click', function(){
@@ -68,11 +77,14 @@ document.getElementById('BtnGhandi').addEventListener('click', function(){
     console.log('This speech took place during the common era.');
   }
 
-  if(speechesArray[1].year < speechesArray[0].year && speechesArray[1].year < speechesArray[2].year){
-    console.log('This is the oldest speech on the page.');
-  }else if(speechesArray[1].year > speechesArray[0].year && speechesArray[1].year > speechesArray[2].year){
-    console.log('This is the most recent speech on the page.');
+  if(speechesArray[1].year >= youngestYear){
+    console.log("This is the most recent speech.");
+  }else if(speechesArray[1].year <= oldestYear){
+    console.log("This speech is ancient.");
+  }else{
+    console.log("Nothing of importance with this speech.");
   }
+
 });
 
 document.getElementById('BtnDemosthenes').addEventListener('click', function(){
@@ -85,19 +97,18 @@ document.getElementById('BtnDemosthenes').addEventListener('click', function(){
     console.log('This speech took place during the common era.');
   }
 
-  if(speechesArray[2].year < speechesArray[0].year && speechesArray[2].year < speechesArray[1].year){
-    console.log('This is the oldest speech on the page.');
-  }else if(speechesArray[2].year > speechesArray[0].year && speechesArray[2].year > speechesArray[1].year){
-    console.log('This is the most recent speech on the page.');
+  if(speechesArray[2].year >= youngestYear){
+    console.log("This is the most recent speech.");
+  }else if(speechesArray[2].year <= oldestYear){
+    console.log("This speech is ancient.");
+  }else{
+    console.log("Nothing of importance with this speech.");
   }
 });
 
 
-userNamePrompt = window.prompt('Hello, what is your name?');
-
-if(typeof userNamePrompt === 'string' && userNamePrompt !== ''){
-  console.log('Hi ' + userNamePrompt + '!');
-}else{
-  console.log('Ok, I\'ll just call you User.');
-  userNamePrompt = 'User';
+var i = 0;
+while (i < speechesArray.length) {
+  console.log("This speech was written by " + speechesArray[i].author);
+  i+= 1;
 }
